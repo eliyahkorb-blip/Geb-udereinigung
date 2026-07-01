@@ -2,6 +2,16 @@
 
 Komplett neu aufgebaute, responsive Website für König Gebäudereinigung (Inhaber: Leart Spahiu), Würzburg. Statisches HTML/CSS/JavaScript ohne Frameworks oder externe Abhängigkeiten.
 
+## GitHub-Pages-Kompatibilität (relative Pfade)
+
+Alle internen Links sowie CSS-, JavaScript-, Bild- und Favicon-Referenzen verwenden **relative Pfade** (`assets/css/style.css`, `index.html`, `../assets/...` auf den Landingpages) statt root-absoluter Pfade (`/assets/...`). Das ist notwendig, weil GitHub-Pages-Projekt-Repositories standardmäßig unter einem Unterpfad ausgeliefert werden (`https://<user>.github.io/<repo-name>/...`) und ein root-absoluter Pfad wie `/assets/css/style.css` dort fälschlich auf `https://<user>.github.io/assets/css/style.css` (ohne Repo-Namen) zeigen und mit 404 fehlschlagen würde.
+
+- Seiten im Wurzelverzeichnis (`index.html`, `leistungen.html`, …) verwenden Pfade ohne führenden Schrägstrich, z. B. `assets/css/style.css`.
+- Die vier SEO-Landingpages liegen eine Ebene tiefer (`bueroreinigung-wuerzburg/index.html` usw.) und verwenden entsprechend `../`-Pfade, z. B. `../assets/css/style.css`, auch für Links auf andere Landingpages und die Wurzelseiten.
+- Ausgenommen sind bewusst absolute URLs, die **immer** vollständig sein müssen: `canonical`-Tags, Open-Graph-/Twitter-Bilder und die JSON-LD-Daten zeigen weiterhin auf die künftige Produktionsdomain `https://www.koenig-gebaeudereinigung.com/`, wie es SEO-Standards verlangen. Das ist unabhängig vom Hosting-Ort korrekt und beeinträchtigt das Laden der Seite nicht.
+- Getestet wurde dies, indem der komplette Repo-Inhalt lokal unter einem `/Geb-udereinigung/`-Unterpfad ausgeliefert wurde (identisch zur echten GitHub-Pages-Projekt-URL `https://eliyahkorb-blip.github.io/Geb-udereinigung/`) und alle 10 Seiten per Headless-Browser (Playwright) durchlaufen wurden: 0 fehlgeschlagene Requests, 0 Console-Errors, CSS wird angewendet, Logo/Bilder laden, Cookie-Banner und Accessibility-Widget funktionieren, 0 WCAG-2A/AA-Verstöße (axe-core).
+- **Hinweis:** In der Entwicklungsumgebung, in der diese Änderung erstellt wurde, ist kein Zugriff auf das öffentliche Internet möglich (die Sandbox blockiert jegliche ausgehende HTTPS-Verbindung zu externen Domains, auch zu `github.io` selbst). Die echte, öffentliche GitHub-Pages-URL konnte daher nicht direkt aufgerufen werden. Die obige lokale Simulation bildet die Pfadstruktur exakt nach und deckt damit genau die Fehlerklasse ab, die zuvor gemeldet wurde — eine kurze manuelle Kontrolle der Live-URL nach dem Deployment wird dennoch empfohlen.
+
 ## Was wurde gebaut
 
 **Seiten**
