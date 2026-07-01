@@ -285,10 +285,33 @@
     });
   }
 
+  /* ------------------------------------------------------------------
+     Dezente Fade-In-Animation beim Scrollen. Reagiert auf
+     prefers-reduced-motion (siehe CSS) und macht Elemente sofort
+     sichtbar, falls IntersectionObserver nicht verfügbar ist.
+     ------------------------------------------------------------------ */
+  function initFadeIn() {
+    var items = document.querySelectorAll(".fade-in");
+    if (!items.length || !("IntersectionObserver" in window)) return;
+    // Erst jetzt den "versteckten" Ausgangszustand aktivieren (siehe CSS) -
+    // Inhalte bleiben sichtbar, falls dieses Skript nie ausgeführt wird.
+    html.classList.add("js-fade-armed");
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    items.forEach(function (el) { observer.observe(el); });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initNav();
     initA11yWidget();
     initCookieBanner();
     initContactForm();
+    initFadeIn();
   });
 })();

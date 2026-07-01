@@ -2,6 +2,18 @@
 
 Komplett neu aufgebaute, responsive Website für König Gebäudereinigung (Inhaber: Leart Spahiu), Würzburg. Statisches HTML/CSS/JavaScript ohne Frameworks oder externe Abhängigkeiten.
 
+## Design (aktueller Stand)
+
+Die Website wurde auf ein dunkles, redaktionelles Premium-Design umgestellt, orientiert an der Atmosphäre der früheren König-Gebäudereinigung-Seite (nicht kopiert, nur als Stimmungsvorlage genutzt):
+
+- **Farben:** Hintergrund `#0B0F14`, Sektionen `#121821`, Flächen `#1A2330`, dezente Gold-Akzentfarbe `#C9A96A`, keine grellen Farben.
+- **Typografie:** Überschriften in Playfair Display (Serif), Fließtext in Inter. Beide Schriften sind **lokal selbst gehostet** (`/assets/fonts/*.woff2`, SIL-Open-Font-License), es wird zu keinem Zeitpunkt Google Fonts oder ein anderer externer Font-Dienst geladen.
+- **Layout:** Editoriale Abschnitte mit dünnen Trennlinien statt bunter, stark abgerundeter Karten. Maximaler Radius 8 px. Dünne Linien-Icons statt bunter Icon-Kreise.
+- **Hero:** Großes dunkles Gebäudefoto als Hintergrund mit weichem Verlauf von links (Text) nach rechts (Bild sichtbar), linksbündige Headline, zwei klare Buttons.
+- **Bilder:** Reale Fotos vom Auftraggeber (siehe Abschnitt „Bilder" unten), einheitlich leicht abgedunkelt/entsättigt (`filter: saturate(0.92) brightness(0.94)`) für einen konsistenten Bildlook.
+- **Animationen:** Sehr dezentes Fade-In beim Scrollen (IntersectionObserver), reagiert auf `prefers-reduced-motion`. Wichtig: Der versteckte Ausgangszustand wird ausschließlich über eine Klasse aktiviert, die JavaScript zur Laufzeit setzt (`js-fade-armed`) — bleibt JavaScript aus (Fehler, Blocker, Crawler ohne JS), ist der komplette Inhalt sofort sichtbar. Das war ursprünglich ein Bug (Inhalte blieben unsichtbar, wenn kein Scroll-Trigger ausgelöst wurde) und wurde behoben.
+- **Accessibility-Pille:** Kleiner, dezenter (40 px, halbtransparent mit Blur), bleibt an allen Breakpoints vollständig bedienbar. Auf sehr kleinen Mobilgeräten wurde ein Layout-Bug behoben, bei dem der Hero-Inhalt so weit nach unten reichte, dass der sekundäre Hero-Button („Jetzt anrufen") von der Pille verdeckt wurde — Hero-Abstände auf Mobile wurden gezielt reduziert, bis in allen getesteten Breakpoints (360/390/430 px) mindestens 18 px Abstand bestehen.
+
 ## GitHub-Pages-Kompatibilität (Pfade)
 
 Diese Website ist aktuell als GitHub-Pages-**Projekt-Repository** veröffentlicht unter:
@@ -10,7 +22,7 @@ Diese Website ist aktuell als GitHub-Pages-**Projekt-Repository** veröffentlich
 https://eliyahkorb-blip.github.io/Geb-udereinigung/
 ```
 
-Alle internen Links sowie CSS-, JavaScript-, Bild- und Favicon-Referenzen verwenden **absolute Pfade mit Repo-Namen-Präfix**, z. B. `/Geb-udereinigung/assets/css/style.css?v=3`, `/Geb-udereinigung/leistungen.html`. Der Präfix wird zentral über die Konstante `PAGES_BASE_PATH` im Generator-Skript gesteuert.
+Alle internen Links sowie CSS-, JavaScript-, Bild- und Favicon-Referenzen verwenden **absolute Pfade mit Repo-Namen-Präfix**, z. B. `/Geb-udereinigung/assets/css/style.css?v=10`, `/Geb-udereinigung/leistungen.html`. Der Präfix wird zentral über die Konstante `PAGES_BASE_PATH` im Generator-Skript gesteuert.
 
 **Warum nicht einfach root-relative Pfade (`assets/css/style.css` ohne führenden Schrägstrich)?** Das war der erste Fix-Versuch und ist auf den ersten Blick einfacher — er hat aber eine Schwachstelle: Reine relative Pfade lösen sich abhängig davon auf, ob die aktuell aufgerufene URL mit oder ohne abschließenden Schrägstrich endet (`/Geb-udereinigung` vs. `/Geb-udereinigung/`). Fehlt der Schrägstrich an irgendeiner Stelle (z. B. durch einen geteilten Link, Safari-Adressleisten-Verhalten auf iOS oder eine App, die Weiterleitungen nicht befolgt), lösen sich relative Pfade eine Ebene zu hoch auf und zeigen wieder auf `https://eliyahkorb-blip.github.io/assets/...` (ohne Repo-Namen) — exakt der ursprüngliche Fehler, und zwar unabhängig vom Browser-Cache. Das erklärt, warum das Problem auf manchen Geräten auch nach Cache leeren/Privatem Fenster bestehen blieb.
 
@@ -18,7 +30,7 @@ Absolute Pfade mit Repo-Präfix (`/Geb-udereinigung/assets/...`) sind von dieser
 
 - Ausgenommen bleiben bewusst die vollständig absoluten Produktions-URLs (`canonical`-Tags, Open-Graph-/Twitter-Bilder, JSON-LD), die weiterhin auf `https://www.koenig-gebaeudereinigung.com/` zeigen — das ist korrektes SEO-Verhalten für die künftige eigene Domain und unabhängig vom aktuellen Hosting-Ort.
 - **Umzug auf eigene Domain / GitHub-User-Page (Root-Hosting):** Sobald die Seite unter `www.koenig-gebaeudereinigung.com` (oder einer GitHub-User-Page ohne Unterpfad) läuft, muss `PAGES_BASE_PATH` im Generator-Skript auf einen leeren String (`""`) gesetzt und die Seite neu erzeugt werden — alle Referenzen werden dann automatisch wieder zu einfachen `/assets/...`-Pfaden ohne Repo-Präfix.
-- `ASSET_VERSION` (aktuell `3`) wird bei jeder CSS/JS-Änderung hochgezählt, damit Browser die neue Version garantiert laden statt eine gecachte Kopie zu verwenden (`style.css?v=3`, `main.js?v=3`).
+- `ASSET_VERSION` (aktuell `10`) wird bei jeder CSS/JS-Änderung hochgezählt, damit Browser die neue Version garantiert laden statt eine gecachte Kopie zu verwenden (`style.css?v=10`, `main.js?v=10`).
 
 ### Testverfahren (da direkter Internetzugriff aus dieser Umgebung nicht möglich ist)
 
@@ -64,33 +76,30 @@ In der Entwicklungsumgebung, in der diese Änderungen erstellt wurden, ist **kei
 
 ## Bilder — Status
 
-Die echte Website `www.koenig-gebaeudereinigung.com` war für automatisierten Abruf durchgehend nicht erreichbar (HTTP 403 bei jedem Zugriffsversuch, siehe Erläuterung im Abschnitt „GitHub-Pages-Kompatibilität" weiter unten). Der Inhaber hat daraufhin **fünf Original-Fotos direkt von der alten Website als Screenshots zur Verfügung gestellt**, die inzwischen eingebaut wurden.
+Die echte Website `www.koenig-gebaeudereinigung.com` war für automatisierten Abruf durchgehend nicht erreichbar (HTTP 403 bei jedem Zugriffsversuch). Der Inhaber hat daraufhin **Original-Fotos und ein Logo direkt von der alten Website zur Verfügung gestellt**, die inzwischen eingebaut wurden.
 
-**Bereits mit echten Fotos ersetzt** (verlustarm als WebP optimiert, korrekte `width`/`height` zur Vermeidung von Layout-Verschiebungen, `loading="lazy"` außer beim Hero-Bild):
+**Bereits mit echten Fotos/Logo ersetzt** (als WebP optimiert, korrekte `width`/`height` zur Vermeidung von Layout-Verschiebungen, `loading="lazy"` außer bei Logo und Hero-Bild):
 
 | Datei | Zeigt | Verwendet in |
 |---|---|---|
-| `hero-reinigung.webp` | Bürogebäude, Außenansicht in der Dämmerung | Hero-Bereich Startseite |
-| `unterhaltsreinigung.webp` | Bürogebäude, Außenansicht (gleiches Motiv wie Hero) | Startseite (Sechser-Grid), Leistungen, Landingpage Büroreinigung |
+| `logo.webp` | Transparentes Logo, Schriftzug „König Gebäudereinigung“ | Header und Footer aller Seiten |
+| `hero-building.webp` | Modernes Bürogebäude mit Glasfassade, Dämmerung | Hero-Hintergrund Startseite, Leistungskarte „Unterhaltsreinigung“, Landingpage Büroreinigung |
+| `about.webp` | Beleuchteter Markenschriftzug in einem Eingangsbereich | Über-uns-Seite |
 | `glasreinigung.webp` | Eingangsbereich mit durchgehenden Glasfronten | Startseite, Leistungen, Landingpage Glasreinigung |
 | `sanitaerreinigung.webp` | Waschraum mit Waschbecken, Armaturen, Handtüchern | Startseite, Leistungen, Landingpage Praxisreinigung |
 | `treppenhausreinigung.webp` | Treppenhaus mit Geländer und Eingangstür | Startseite, Leistungen, Landingpage Treppenhausreinigung |
 | `bodenreinigung.webp` | Leerer Büroraum mit Bodenbelag in Nahaufnahme | Startseite, Leistungen |
+| `og-image.png` | Logo auf dunklem Grund, generiert aus dem echten Logo | Open-Graph-/Twitter-Vorschaubild (PNG statt SVG, da nicht alle Social-Plattformen SVG-Vorschaubilder zuverlässig rendern) |
 
-Diese Fotos stammen nachweislich von der bisherigen Website des Auftraggebers (vom Inhaber selbst bereitgestellt) — es handelt sich also weiterhin **nicht um Stockfotos oder KI-generierte Bilder**, wie in der Aufgabenstellung gefordert. Damit zeigen jetzt 5 der 6 Leistungs-Karten im Startseiten-Grid echte Fotos.
+Diese Bilder stammen nachweislich vom Auftraggeber selbst (Logo und Fotos von der bisherigen Website) — es handelt sich also **nicht um Stockfotos oder KI-generierte Bilder**, wie in der Aufgabenstellung gefordert. Damit zeigen 5 der 6 Leistungs-Karten im Startseiten-Grid echte Fotos.
 
-**Weiterhin als klar gekennzeichneter Platzhalter aktiv** (beschriftete SVG-Grafik mit Icon, gestricheltem Rahmen, Hinweistext „Platzhalter — ersetzen durch …"), da dafür kein passendes Foto vorlag:
+**Weiterhin als klar gekennzeichneter Platzhalter aktiv** (dunkle SVG-Grafik mit Icon im Corporate-Design, Hinweistext „Platzhalter — ersetzen durch …"), da dafür kein passendes Foto vorlag:
 
 | Datei (Platzhalter) | Ersetzen durch | Verwendet in |
 |---|---|---|
 | `sonderreinigung.svg` | `sonderreinigung.webp` | Startseite, Leistungen |
-| `about.svg` | `about.webp` (min. 1200×900 px) | Über-uns-Seite |
-| `og-image.svg` | `og-image.png`/`.jpg`, 1200×630 px | Open-Graph-Vorschaubild (viele Social-Plattformen rendern SVG nicht zuverlässig) |
-| `logo.svg` | echtes Firmenlogo, falls vorhanden | Header, Footer aller Seiten |
 
-`logo.svg` und `og-image.svg` sind eigens gestaltete, einfache Wort-/Bildmarken (kein Stockmaterial) — sollte der Inhaber ein offizielles Firmenlogo besitzen, bitte damit ersetzen.
-
-Empfehlung für die verbleibenden drei Motive: ein weiteres Foto vom laufenden Praxisbetrieb (Unterhaltsreinigung), ein Team-/Über-uns-Foto und ggf. ein Sonderreinigungs-Motiv nachreichen, als WebP exportieren (Dateiname exakt wie oben, gleiche Groß-/Kleinschreibung), danach `width`/`height` in den betroffenen `<img>`-Tags an die tatsächlichen Pixelmaße anpassen.
+Empfehlung für das letzte Motiv: ein Foto von einer Sonderreinigungssituation (z. B. nach Umbauarbeiten) nachreichen, als WebP exportieren (Dateiname exakt `sonderreinigung.webp`), danach `width`/`height` im betroffenen `<img>`-Tag an die tatsächlichen Pixelmaße anpassen.
 
 ## Rechtliche Punkte — vom Inhaber/Anwalt final prüfen lassen
 
