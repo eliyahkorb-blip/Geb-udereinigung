@@ -6,13 +6,14 @@ Komplett neu aufgebaute, responsive Website für König Gebäudereinigung (Inhab
 
 Die Website wurde auf ein dunkles, redaktionelles Premium-Design umgestellt, orientiert an der Atmosphäre der früheren König-Gebäudereinigung-Seite (nicht kopiert, nur als Stimmungsvorlage genutzt):
 
-- **Farben:** Hintergrund `#0B0F14`, Sektionen `#121821`, Flächen `#1A2330`, dezente Gold-Akzentfarbe `#C9A96A`, keine grellen Farben.
-- **Typografie:** Überschriften in Playfair Display (Serif), Fließtext in Inter. Beide Schriften sind **lokal selbst gehostet** (`/assets/fonts/*.woff2`, SIL-Open-Font-License), es wird zu keinem Zeitpunkt Google Fonts oder ein anderer externer Font-Dienst geladen.
-- **Layout:** Editoriale Abschnitte mit dünnen Trennlinien statt bunter, stark abgerundeter Karten. Maximaler Radius 8 px. Dünne Linien-Icons statt bunter Icon-Kreise.
-- **Hero:** Großes dunkles Gebäudefoto als Hintergrund mit weichem Verlauf von links (Text) nach rechts (Bild sichtbar), linksbündige Headline, zwei klare Buttons.
-- **Bilder:** Reale Fotos vom Auftraggeber (siehe Abschnitt „Bilder" unten), einheitlich leicht abgedunkelt/entsättigt (`filter: saturate(0.92) brightness(0.94)`) für einen konsistenten Bildlook.
+- **Farben:** Hintergrund `#0E1117`, Sektionen `#121722`, Flächen `#1A2330`, champagnefarbene Gold-Akzentfarbe `#C4A876` (bewusst weniger gelbstichig als die ursprüngliche Fassung), keine grellen Farben. Gold wird nur noch als Akzent verwendet (Primär-Button, aktive Nav-Unterstreichung, Icons) statt flächig.
+- **Typografie:** Überschriften in Playfair Display (Serif), Fließtext in Inter. Beide Schriften sind **lokal selbst gehostet** (`/assets/fonts/*.woff2`, SIL-Open-Font-License), es wird zu keinem Zeitpunkt Google Fonts oder ein anderer externer Font-Dienst geladen. `text-wrap: balance` auf Überschriften und `text-wrap: pretty` auf Fließtext vermeiden unschöne Zeilenumbrüche.
+- **Layout:** Editoriale Abschnitte mit dünnen Trennlinien statt bunter, stark abgerundeter Karten. Maximaler Radius 8 px. Dünne Linien-Icons statt bunter Icon-Kreise. Die Leistungs-Detailabschnitte wechseln bewusst zwischen Bild-links/Text-rechts und Text-links/Bild-rechts, damit die Seite nicht gleichförmig wirkt.
+- **Hero:** Großes, aufgehelltes Gebäudefoto als Hintergrund (Helligkeit/Kontrast/Sättigung gezielt angehoben) mit weichem, mehrstufigem Verlauf von links (Text) nach rechts (Bild sichtbar), Textblock auf breiten Screens leicht nach links gerückt, mehr Weißraum zwischen Eyebrow/Headline/Text/Buttons.
+- **Bilder:** Reale Fotos vom Auftraggeber (siehe Abschnitt „Bilder" unten), einheitlich leicht abgedunkelt/entsättigt (`filter: saturate(0.92) brightness(0.94)`) für einen konsistenten Bildlook. Karten- und Detailbilder haben einen feinen 1-px-Rahmen; auf den Leistungs-Karten zoomt das Bild beim Hover dezent (`scale(1.045)`) und der Kartenhintergrund hellt leicht auf.
+- **Navigation:** Sticky Header ist ab Desktop-Breite (≥ 1024 px) leicht transparent mit dezentem Blur hinterlegt (`backdrop-filter: blur(10px)`); bewusst nur ab diesem Breakpoint, da `backdrop-filter` auf einem Vorfahren eines `position: fixed`-Elements einen neuen Containing Block erzeugt und so das mobile Vollbildmenü zerstören würde (siehe Bug-Historie unten). Aktive/gehoverte Nav-Links bekommen eine animierte, ausfahrende Unterstreichung (`scaleX`-Transition) statt eines harten Farbwechsels.
 - **Animationen:** Sehr dezentes Fade-In beim Scrollen (IntersectionObserver), reagiert auf `prefers-reduced-motion`. Wichtig: Der versteckte Ausgangszustand wird ausschließlich über eine Klasse aktiviert, die JavaScript zur Laufzeit setzt (`js-fade-armed`) — bleibt JavaScript aus (Fehler, Blocker, Crawler ohne JS), ist der komplette Inhalt sofort sichtbar. Das war ursprünglich ein Bug (Inhalte blieben unsichtbar, wenn kein Scroll-Trigger ausgelöst wurde) und wurde behoben.
-- **Accessibility-Pille:** Kleiner, dezenter (40 px, halbtransparent mit Blur), bleibt an allen Breakpoints vollständig bedienbar. Auf sehr kleinen Mobilgeräten wurde ein Layout-Bug behoben, bei dem der Hero-Inhalt so weit nach unten reichte, dass der sekundäre Hero-Button („Jetzt anrufen") von der Pille verdeckt wurde — Hero-Abstände auf Mobile wurden gezielt reduziert, bis in allen getesteten Breakpoints (360/390/430 px) mindestens 18 px Abstand bestehen.
+- **Accessibility-Pille:** Kleiner, dezenter (40 px, halbtransparent mit Blur), bleibt an allen Breakpoints vollständig bedienbar. Auf sehr kleinen Mobilgeräten wurde ein Layout-Bug behoben, bei dem der Hero-Inhalt so weit nach unten reichte, dass der sekundäre Hero-Button („Jetzt anrufen") von der Pille verdeckt wurde — Hero-Abstände auf Mobile wurden gezielt reduziert, bis in allen getesteten Breakpoints (360/390/430 px) mindestens 12 px Abstand bestehen (Achtung: CSS-Margin-Collapsing zwischen aufeinanderfolgenden Absätzen muss dabei mitberücksichtigt werden, nicht nur der `margin-top` des letzten Elements).
 
 ## GitHub-Pages-Kompatibilität (Pfade)
 
@@ -30,7 +31,7 @@ Absolute Pfade mit Repo-Präfix (`/Geb-udereinigung/assets/...`) sind von dieser
 
 - Ausgenommen bleiben bewusst die vollständig absoluten Produktions-URLs (`canonical`-Tags, Open-Graph-/Twitter-Bilder, JSON-LD), die weiterhin auf `https://www.koenig-gebaeudereinigung.com/` zeigen — das ist korrektes SEO-Verhalten für die künftige eigene Domain und unabhängig vom aktuellen Hosting-Ort.
 - **Umzug auf eigene Domain / GitHub-User-Page (Root-Hosting):** Sobald die Seite unter `www.koenig-gebaeudereinigung.com` (oder einer GitHub-User-Page ohne Unterpfad) läuft, muss `PAGES_BASE_PATH` im Generator-Skript auf einen leeren String (`""`) gesetzt und die Seite neu erzeugt werden — alle Referenzen werden dann automatisch wieder zu einfachen `/assets/...`-Pfaden ohne Repo-Präfix.
-- `ASSET_VERSION` (aktuell `10`) wird bei jeder CSS/JS-Änderung hochgezählt, damit Browser die neue Version garantiert laden statt eine gecachte Kopie zu verwenden (`style.css?v=10`, `main.js?v=10`).
+- `ASSET_VERSION` (aktuell `11`) wird bei jeder CSS/JS-Änderung hochgezählt, damit Browser die neue Version garantiert laden statt eine gecachte Kopie zu verwenden (`style.css?v=11`, `main.js?v=11`).
 
 ### Testverfahren (da direkter Internetzugriff aus dieser Umgebung nicht möglich ist)
 
@@ -89,17 +90,24 @@ Die echte Website `www.koenig-gebaeudereinigung.com` war für automatisierten Ab
 | `sanitaerreinigung.webp` | Waschraum mit Waschbecken, Armaturen, Handtüchern | Startseite, Leistungen, Landingpage Praxisreinigung |
 | `treppenhausreinigung.webp` | Treppenhaus mit Geländer und Eingangstür | Startseite, Leistungen, Landingpage Treppenhausreinigung |
 | `bodenreinigung.webp` | Leerer Büroraum mit Bodenbelag in Nahaufnahme | Startseite, Leistungen |
+| `sonderreinigung.webp` | Mitarbeiter mit Bodenreinigungsmaschine in modernem Empfangsbereich, „Achtung Rutschgefahr"-Warnschild | Startseite, Leistungen |
 | `og-image.png` | Logo auf dunklem Grund, generiert aus dem echten Logo | Open-Graph-/Twitter-Vorschaubild (PNG statt SVG, da nicht alle Social-Plattformen SVG-Vorschaubilder zuverlässig rendern) |
 
-Diese Bilder stammen nachweislich vom Auftraggeber selbst (Logo und Fotos von der bisherigen Website) — es handelt sich also **nicht um Stockfotos oder KI-generierte Bilder**, wie in der Aufgabenstellung gefordert. Damit zeigen 5 der 6 Leistungs-Karten im Startseiten-Grid echte Fotos.
+Diese Bilder stammen nachweislich vom Auftraggeber selbst (Logo und Fotos von der bisherigen Website bzw. neu bereitgestellte Aufnahmen) — es handelt sich also **nicht um Stockfotos oder KI-generierte Bilder**, wie in der Aufgabenstellung gefordert. Damit zeigen inzwischen **alle 6 Leistungs-Karten** im Startseiten-Grid echte Fotos, es sind keine Platzhalter-Grafiken mehr aktiv.
 
-**Weiterhin als klar gekennzeichneter Platzhalter aktiv** (dunkle SVG-Grafik mit Icon im Corporate-Design, Hinweistext „Platzhalter — ersetzen durch …"), da dafür kein passendes Foto vorlag:
+## Feinschliff-Durchgang (Agentur-Politur)
 
-| Datei (Platzhalter) | Ersetzen durch | Verwendet in |
-|---|---|---|
-| `sonderreinigung.svg` | `sonderreinigung.webp` | Startseite, Leistungen |
+Nach dem großen Dark-Redesign folgte ein gezielter Politur-Durchgang, der bewusst **weder Struktur noch Inhalte verändert** hat, sondern nur Design-Feinheiten:
 
-Empfehlung für das letzte Motiv: ein Foto von einer Sonderreinigungssituation (z. B. nach Umbauarbeiten) nachreichen, als WebP exportieren (Dateiname exakt `sonderreinigung.webp`), danach `width`/`height` im betroffenen `<img>`-Tag an die tatsächlichen Pixelmaße anpassen.
+- Farbpalette leicht nachjustiert (weniger gelbstichiges Gold, dunklerer Hintergrund) und Gold konsequent auf Akzentrolle reduziert (Primär-Button, Icons, Hover-Zustände) statt großflächiger Verwendung.
+- Hero-Gebäudefoto aufgehellt/kontrastreicher gemacht, Verlauf natürlicher gestaltet, Textblock leicht nach links gerückt, mehr Weißraum zwischen den Elementen.
+- Letztes fehlendes reales Foto (Sonderreinigung) ergänzt — damit sind keine Platzhalterbilder mehr aktiv.
+- Dezente Hover-Animationen auf Leistungs-Karten (Bildzoom, Kartenhintergrund hellt auf) und Landingpage-Verweisen (Einzug, Pfeil-Verschiebung) ergänzt.
+- Sticky Header ab Desktop-Breite mit leichtem Transparenz-/Blur-Effekt, animierte Nav-Unterstreichung statt hartem Farbwechsel.
+- Footer-Abstände und -Typografie verfeinert.
+- Typografie: `text-wrap: balance`/`pretty` gegen unschöne Zeilenumbrüche, etwas mehr Zeilenhöhe und Abstand um Überschriften.
+
+Beim Umsetzen der zusätzlichen Weißraum-Wünsche im Hero ist auf Mobile kurzzeitig eine Überlappung zwischen dem Sekundär-Button und der Accessibility-Pille wieder aufgetreten (CSS-Margin-Collapsing zwischen zwei aufeinanderfolgenden `<p>`-Elementen sorgte dafür, dass eine reine `margin-top`-Reduzierung auf dem Button-Block wirkungslos blieb). Behoben durch zusätzliche Reduzierung der `margin-bottom`-Werte der vorangehenden Absätze auf Mobile; erneut mit automatisierten Bounding-Box-Prüfungen bei 360/390/430 px verifiziert (12–107 px Abstand, keine Überlappung mehr).
 
 ## Rechtliche Punkte — vom Inhaber/Anwalt final prüfen lassen
 
