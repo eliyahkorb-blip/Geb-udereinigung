@@ -71,20 +71,20 @@ Die echte Website `www.koenig-gebaeudereinigung.com` war für automatisierten Ab
 | Datei | Zeigt | Verwendet in |
 |---|---|---|
 | `hero-reinigung.webp` | Bürogebäude, Außenansicht in der Dämmerung | Hero-Bereich Startseite |
+| `unterhaltsreinigung.webp` | Bürogebäude, Außenansicht (gleiches Motiv wie Hero) | Startseite (Sechser-Grid), Leistungen, Landingpage Büroreinigung |
 | `glasreinigung.webp` | Eingangsbereich mit durchgehenden Glasfronten | Startseite, Leistungen, Landingpage Glasreinigung |
 | `sanitaerreinigung.webp` | Waschraum mit Waschbecken, Armaturen, Handtüchern | Startseite, Leistungen, Landingpage Praxisreinigung |
 | `treppenhausreinigung.webp` | Treppenhaus mit Geländer und Eingangstür | Startseite, Leistungen, Landingpage Treppenhausreinigung |
 | `bodenreinigung.webp` | Leerer Büroraum mit Bodenbelag in Nahaufnahme | Startseite, Leistungen |
 
-Diese Fotos stammen nachweislich von der bisherigen Website des Auftraggebers (vom Inhaber selbst bereitgestellt) — es handelt sich also weiterhin **nicht um Stockfotos oder KI-generierte Bilder**, wie in der Aufgabenstellung gefordert.
+Diese Fotos stammen nachweislich von der bisherigen Website des Auftraggebers (vom Inhaber selbst bereitgestellt) — es handelt sich also weiterhin **nicht um Stockfotos oder KI-generierte Bilder**, wie in der Aufgabenstellung gefordert. Damit zeigen jetzt 5 der 6 Leistungs-Karten im Startseiten-Grid echte Fotos.
 
-**Weiterhin als klar gekennzeichnete Platzhalter aktiv** (beschriftete SVG-Grafik mit Icon, gestricheltem Rahmen, Hinweistext „Platzhalter — ersetzen durch …"), da für diese Motive kein passendes Foto vorlag:
+**Weiterhin als klar gekennzeichneter Platzhalter aktiv** (beschriftete SVG-Grafik mit Icon, gestricheltem Rahmen, Hinweistext „Platzhalter — ersetzen durch …"), da dafür kein passendes Foto vorlag:
 
 | Datei (Platzhalter) | Ersetzen durch | Verwendet in |
 |---|---|---|
-| `unterhaltsreinigung.svg` | `unterhaltsreinigung.webp` | Startseite, Leistungen, Landingpage Büroreinigung |
-| `about.svg` | `about.webp` (min. 1200×900 px) | Über-uns-Seite |
 | `sonderreinigung.svg` | `sonderreinigung.webp` | Startseite, Leistungen |
+| `about.svg` | `about.webp` (min. 1200×900 px) | Über-uns-Seite |
 | `og-image.svg` | `og-image.png`/`.jpg`, 1200×630 px | Open-Graph-Vorschaubild (viele Social-Plattformen rendern SVG nicht zuverlässig) |
 | `logo.svg` | echtes Firmenlogo, falls vorhanden | Header, Footer aller Seiten |
 
