@@ -62,30 +62,35 @@ In der Entwicklungsumgebung, in der diese Änderungen erstellt wurden, ist **kei
   - `backdrop-filter` am Header erzeugte einen neuen Containing Block für das `position: fixed`-Menü und ließ es auf ca. 120 px Höhe kollabieren, statt den Bildschirm zu füllen — Header nutzt jetzt eine deckende Hintergrundfarbe statt Blur-Effekt
   - Leistungs-Karten-Raster sprang bei 768 px (Tablet) fälschlich auf eine Spalte zurück — Zwischenschritt mit zwei Spalten ergänzt
 
-## Fehlende Bilder (Platzhalter aktiv)
+## Bilder — Status
 
-Die echte Website `www.koenig-gebaeudereinigung.com` konnte **nicht automatisiert ausgelesen werden**: Jeder Zugriffsversuch (direkter Abruf und über das Web-Fetch-Werkzeug, mit und ohne `www.`, per HTTP und HTTPS) wurde mit **HTTP 403 (Forbidden)** abgewiesen. Auch die Websuche fand keine im Web archivierte/indexierte Version dieser konkreten Domain in Würzburg (die Suchtreffer zu „König Gebäudereinigung“ gehören zu einem anderen, nicht verwandten Betrieb in Krefeld). Es konnten daher **keine echten Fotos extrahiert** werden.
+Die echte Website `www.koenig-gebaeudereinigung.com` war für automatisierten Abruf durchgehend nicht erreichbar (HTTP 403 bei jedem Zugriffsversuch, siehe Erläuterung im Abschnitt „GitHub-Pages-Kompatibilität" weiter unten). Der Inhaber hat daraufhin **fünf Original-Fotos direkt von der alten Website als Screenshots zur Verfügung gestellt**, die inzwischen eingebaut wurden.
 
-Alle Bildinhalte dieser Website sind aktuell **klar gekennzeichnete Platzhalter** (beschriftete SVG-Grafiken mit Icon, gestricheltem Rahmen und Hinweistext „Platzhalter — ersetzen durch …“). Es wurden **keine Stockfotos und keine KI-generierten Bilder** verwendet.
+**Bereits mit echten Fotos ersetzt** (verlustarm als WebP optimiert, korrekte `width`/`height` zur Vermeidung von Layout-Verschiebungen, `loading="lazy"` außer beim Hero-Bild):
 
-Folgende Dateien in `/assets/img/` müssen durch echte, für das Unternehmen aufgenommene Fotos ersetzt werden (gleicher Dateiname, Endung `.webp` statt `.svg`, danach den `src`-Pfad in den jeweiligen HTML-Dateien anpassen):
+| Datei | Zeigt | Verwendet in |
+|---|---|---|
+| `hero-reinigung.webp` | Bürogebäude, Außenansicht in der Dämmerung | Hero-Bereich Startseite |
+| `glasreinigung.webp` | Eingangsbereich mit durchgehenden Glasfronten | Startseite, Leistungen, Landingpage Glasreinigung |
+| `sanitaerreinigung.webp` | Waschraum mit Waschbecken, Armaturen, Handtüchern | Startseite, Leistungen, Landingpage Praxisreinigung |
+| `treppenhausreinigung.webp` | Treppenhaus mit Geländer und Eingangstür | Startseite, Leistungen, Landingpage Treppenhausreinigung |
+| `bodenreinigung.webp` | Leerer Büroraum mit Bodenbelag in Nahaufnahme | Startseite, Leistungen |
+
+Diese Fotos stammen nachweislich von der bisherigen Website des Auftraggebers (vom Inhaber selbst bereitgestellt) — es handelt sich also weiterhin **nicht um Stockfotos oder KI-generierte Bilder**, wie in der Aufgabenstellung gefordert.
+
+**Weiterhin als klar gekennzeichnete Platzhalter aktiv** (beschriftete SVG-Grafik mit Icon, gestricheltem Rahmen, Hinweistext „Platzhalter — ersetzen durch …"), da für diese Motive kein passendes Foto vorlag:
 
 | Datei (Platzhalter) | Ersetzen durch | Verwendet in |
 |---|---|---|
-| `hero-reinigung.svg` | `hero-reinigung.webp` (min. 1600×1000 px) | Hero-Bereich Startseite |
+| `unterhaltsreinigung.svg` | `unterhaltsreinigung.webp` | Startseite, Leistungen, Landingpage Büroreinigung |
 | `about.svg` | `about.webp` (min. 1200×900 px) | Über-uns-Seite |
-| `unterhaltsreinigung.svg` | `unterhaltsreinigung.webp` | Startseite, Leistungen |
-| `glasreinigung.svg` | `glasreinigung.webp` | Startseite, Leistungen |
-| `sanitaerreinigung.svg` | `sanitaerreinigung.webp` | Startseite, Leistungen, Praxisreinigung-Landingpage |
-| `treppenhausreinigung.svg` | `treppenhausreinigung.webp` | Startseite, Leistungen, Treppenhausreinigung-Landingpage |
-| `bodenreinigung.svg` | `bodenreinigung.webp` | Startseite, Leistungen |
 | `sonderreinigung.svg` | `sonderreinigung.webp` | Startseite, Leistungen |
-| `logo.svg` | echtes Firmenlogo, falls vorhanden | Header, Footer aller Seiten |
 | `og-image.svg` | `og-image.png`/`.jpg`, 1200×630 px | Open-Graph-Vorschaubild (viele Social-Plattformen rendern SVG nicht zuverlässig) |
+| `logo.svg` | echtes Firmenlogo, falls vorhanden | Header, Footer aller Seiten |
 
-`logo.svg` und `og-image.svg` sind eigens gestaltete, einfache Wort-/Bildmarken (kein Stockmaterial), damit die Seite nicht mit generischen Platzhaltern wirkt — sollte der Inhaber ein offizielles Firmenlogo besitzen, bitte damit ersetzen.
+`logo.svg` und `og-image.svg` sind eigens gestaltete, einfache Wort-/Bildmarken (kein Stockmaterial) — sollte der Inhaber ein offizielles Firmenlogo besitzen, bitte damit ersetzen.
 
-Empfehlung: Fotos vom eigenen Reinigungsteam/-objekten in Würzburg machen (Außenansicht Gebäude, Team bei der Arbeit, Detailaufnahmen der sechs Leistungen), als WebP exportieren, `width`/`height`-Attribute in den `<img>`-Tags entsprechend der echten Pixelmaße anpassen und `loading="lazy"` (außer Hero-Bild) beibehalten.
+Empfehlung für die verbleibenden drei Motive: ein weiteres Foto vom laufenden Praxisbetrieb (Unterhaltsreinigung), ein Team-/Über-uns-Foto und ggf. ein Sonderreinigungs-Motiv nachreichen, als WebP exportieren (Dateiname exakt wie oben, gleiche Groß-/Kleinschreibung), danach `width`/`height` in den betroffenen `<img>`-Tags an die tatsächlichen Pixelmaße anpassen.
 
 ## Rechtliche Punkte — vom Inhaber/Anwalt final prüfen lassen
 
