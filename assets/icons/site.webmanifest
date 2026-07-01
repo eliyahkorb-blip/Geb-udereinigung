@@ -1,0 +1,11 @@
+{
+  "name": "König Gebäudereinigung",
+  "short_name": "König Reinigung",
+  "icons": [
+    { "src": "/assets/icons/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "theme_color": "#14313C",
+  "background_color": "#FAFAF8",
+  "display": "standalone",
+  "start_url": "/"
+}

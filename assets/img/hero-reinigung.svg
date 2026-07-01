@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-label="Platzhalterbild: Hero: Gebäudereinigung Würzburg">
+  <rect width="1600" height="1000" fill="#EDEAE2"/>
+  <rect x="6" y="6" width="1588" height="988" fill="none" stroke="#CFC9BA" stroke-width="2" stroke-dasharray="10 8"/>
+  <g transform="translate(800.0,480.0)" stroke="#14313C" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-24" y="-30" width="48" height="60" fill="none" stroke="#14313C" stroke-width="3"/><line x1="-14" y1="-20" x2="-14" y2="-10" stroke="#14313C" stroke-width="3"/><line x1="0" y1="-20" x2="0" y2="-10" stroke="#14313C" stroke-width="3"/><line x1="14" y1="-20" x2="14" y2="-10" stroke="#14313C" stroke-width="3"/><line x1="-14" y1="0" x2="-14" y2="10" stroke="#14313C" stroke-width="3"/><line x1="0" y1="0" x2="0" y2="10" stroke="#14313C" stroke-width="3"/><line x1="14" y1="0" x2="14" y2="10" stroke="#14313C" stroke-width="3"/><rect x="-6" y="16" width="12" height="14" stroke="#14313C" stroke-width="3" fill="none"/>
+  </g>
+  <text x="800.0" y="942" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#14313C" font-weight="600">Hero: Gebäudereinigung Würzburg</text>
+  <rect x="610.0" y="960" width="380" height="26" fill="#14313C"/>
+  <text x="800.0" y="979" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#FAFAF8">Platzhalter — ersetzen durch hero-reinigung.webp</text>
+</svg>

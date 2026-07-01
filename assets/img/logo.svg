@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="64" viewBox="0 0 260 64" role="img" aria-label="König Gebäudereinigung Logo">
+  <g transform="translate(4,8)">
+    <rect x="0" y="0" width="48" height="48" rx="10" fill="#14313C"/>
+    <path d="M14,32 V16 M14,24 L24,16 M14,24 L24,32" stroke="#FAFAF8" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28,32 V16" stroke="#FAFAF8" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    <path d="M34,16 L26,32" stroke="#B8985A" stroke-width="0" fill="none"/>
+    <circle cx="24" cy="10" r="2.2" fill="#B8985A"/>
+  </g>
+  <text x="62" y="27" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#14313C" letter-spacing="0.3">König</text>
+  <text x="62" y="46" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="500" fill="#4B535B" letter-spacing="0.5">GEBÄUDEREINIGUNG</text>
+</svg>
